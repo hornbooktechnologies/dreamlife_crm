@@ -168,7 +168,7 @@ const CreateOrEditUserForm = ({
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogContent className='w-[95vw] sm:max-w-[550px] max-h-[90vh] overflow-hidden p-0 bg-white border-0 shadow-2xl flex flex-col text-left [&>button]:!text-white [&>button]:top-5 [&>button]:right-5 [&>button]:focus:ring-0 [&>button]:focus:outline-none [&>button]:transition-all [&>button>svg]:w-6 [&>button>svg]:h-6 [&>button>svg]:stroke-[3]'>
                 {/* Header with Gradient */}
-                <DialogHeader className='p-6 bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] text-white shrink-0'>
+                <DialogHeader className='p-6 bg-gradient-to-r from-primary via-primary-hover to-primary text-white shrink-0'>
                     <DialogTitle className='text-2xl font-bold flex items-center gap-2'>
                         {type === 'edit' ? 'Edit User Details' : 'Create New User'}
                     </DialogTitle>
@@ -444,14 +444,14 @@ const CreateOrEditUserForm = ({
                                 <Button
                                     type='submit'
                                     disabled={isSubmitting}
-                                    className='bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] text-white hover:opacity-90 transition-opacity'
+                                    className='bg-gradient-to-r from-primary via-primary-hover to-primary text-white hover:opacity-90 transition-opacity'
                                 >
                                     {isSubmitting ? (
                                         'Processing...'
                                     ) : type === 'edit' ? (
-                                        'Save Changes'
+                                        'Update'
                                     ) : (
-                                        'Create User'
+                                        'Create'
                                     )}
                                 </Button>
                             </DialogFooter>
@@ -464,3 +464,4 @@ const CreateOrEditUserForm = ({
 };
 
 export default CreateOrEditUserForm;
+

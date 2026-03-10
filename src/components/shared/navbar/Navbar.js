@@ -106,7 +106,7 @@ const Navbar = () => {
                             <p className='text-sm font-bold text-slate-700 leading-none mb-1 capitalize'>
                                 {user?.first_name?.toLowerCase()} {user?.last_name?.toLowerCase()}
                             </p>
-                            <p className='text-xs text-blue-600 font-semibold capitalize bg-blue-50 px-2 py-0.5 rounded-full inline-block'>
+                            <p className='text-xs text-primary font-semibold capitalize bg-primary/10 px-2 py-0.5 rounded-full inline-block'>
                                 {user?.role === 'bde' || user?.role === 'Bde' ? 'BDE' : user?.role || 'User'}
                             </p>
                         </div>
@@ -119,7 +119,7 @@ const Navbar = () => {
                                 title='View Profile'
                                 disabled={isLoadingEmployee}
                             >
-                                <div className='w-10 h-10 rounded-full bg-gradient-to-br from-[#3a5f9e] to-[#6fa8dc] flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:scale-105 transition-all duration-300 ring-2 ring-white'>
+                                <div className='w-10 h-10 rounded-full bg-gradient-to-br from-primary via-primary-hover to-primary flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-105 transition-all duration-300 ring-2 ring-white'>
                                     {profileImage ? (
                                         <img
                                             src={profileImage}
@@ -134,7 +134,7 @@ const Navbar = () => {
                         ) : (
                             // Non-clickable profile photo for admin
                             <div className='relative'>
-                                <div className='w-10 h-10 rounded-full bg-gradient-to-br from-[#3a5f9e] to-[#6fa8dc] flex items-center justify-center text-white font-bold text-sm shadow-lg ring-2 ring-white'>
+                                <div className='w-10 h-10 rounded-full bg-gradient-to-br from-primary via-primary-hover to-primary flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-primary/20 ring-2 ring-white'>
                                     {profileImage ? (
                                         <img
                                             src={profileImage}

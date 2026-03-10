@@ -30,13 +30,13 @@ const ACCEPTED_IMAGE_TYPES = [
 ];
 
 const DESIGNATION_OPTIONS = [
-    "Freshers",
-    "Frontend",
-    "Backend",
-    "Full Stack",
-    "UI/UX",
-    "HR",
-    "BDE",
+    "Jr. Frontend Developer",
+    "Sr. Frontend Developer",
+    "Jr. Backend Developer",
+    "Sr. Backend Developer",
+    "Full-Stack Developer",
+    "Jr. BDE",
+    "Sr. BDE",
 ];
 
 const findMatchingDesignation = (value) => {
@@ -441,7 +441,7 @@ const EmployeeFormPage = () => {
                         <ArrowLeft className="w-5 h-5" />
                     </Button>
                     <div>
-                        <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] bg-clip-text text-transparent">
+                        <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent">
                             {type === "edit" ? "Edit Employee" : "Add New Employee"}
                         </h1>
                         <p className="text-sm text-gray-500 mt-1">
@@ -1399,8 +1399,8 @@ const EmployeeFormPage = () => {
                             {isSubmitting
                                 ? "Processing..."
                                 : type === "edit"
-                                    ? "Save Changes"
-                                    : "Create Employee"}
+                                    ? "Update"
+                                    : "Create"}
                         </Button>
                     </div>
                 </form>
@@ -1410,3 +1410,4 @@ const EmployeeFormPage = () => {
 };
 
 export default EmployeeFormPage;
+

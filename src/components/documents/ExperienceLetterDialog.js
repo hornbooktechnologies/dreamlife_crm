@@ -49,7 +49,7 @@ const LetterGenerationDialog = ({ isOpen, setIsOpen, employee }) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="max-w-4xl w-[95vw] h-[90vh] overflow-hidden p-0 bg-white border-0 shadow-2xl flex flex-col text-left [&>button]:!text-white [&>button]:top-5 [&>button]:right-5 [&>button]:focus:ring-0 [&>button]:focus:outline-none [&>button]:transition-all [&>button>svg]:w-6 [&>button>svg]:h-6 [&>button>svg]:stroke-[3]">
-        <DialogHeader className="p-6 bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] text-white shrink-0 !text-left">
+        <DialogHeader className="p-6 bg-gradient-to-r from-primary via-primary-hover to-primary text-white shrink-0 !text-left">
           <DialogTitle className="text-2xl font-bold flex items-center gap-2">
             <span className="hidden sm:inline">Generate </span> Experience Letter
           </DialogTitle>
@@ -140,7 +140,7 @@ const LetterGenerationDialog = ({ isOpen, setIsOpen, employee }) => {
 
               <div className="pt-4 flex gap-3">
                 <Button
-                  className="w-full bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] text-white shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-200 hover:scale-[1.02] active:scale-95 font-semibold px-4 py-2"
+                  className="w-full bg-gradient-to-r from-primary via-primary-hover to-primary text-white shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-200 hover:scale-[1.02] active:scale-95 font-semibold px-4 py-2"
                   onClick={handlePrint}
                 >
                   <Printer className="mr-2 h-4 w-4" /> Print / Save as PDF
@@ -189,3 +189,4 @@ const LetterGenerationDialog = ({ isOpen, setIsOpen, employee }) => {
 };
 
 export default LetterGenerationDialog;
+

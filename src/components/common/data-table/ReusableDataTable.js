@@ -435,7 +435,7 @@ export default function ReusableDataTable({
                     key={page}
                     variant={currentPage === page ? "default" : "outline"}
                     size="sm"
-                    className={`h-8 w-8 ${currentPage === page ? "bg-[#3a7fc4] hover:bg-[#326eb0]" : ""}`}
+                    className="h-8 w-8"
                     onClick={() => handleChangePage(page)}
                   >
                     {page}

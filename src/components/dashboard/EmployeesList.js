@@ -40,10 +40,13 @@ const EmployeesList = () => {
     employees: [],
     pagination: { current_page: 1, per_page: 10, total: 0, last_page: 1 },
   });
-  const [pagination, setPagination] = useState({
-    current_page: 1,
-    per_page: 10,
-    total: 0,
+  const [pagination, setPagination] = useState(() => {
+    const saved = sessionStorage.getItem('employees_pagination');
+    return saved ? JSON.parse(saved) : {
+      current_page: 1,
+      per_page: 10,
+      total: 0,
+    };
   });
   const [sortedEmployees, setSortedEmployees] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -92,12 +95,14 @@ const EmployeesList = () => {
               last_page: paginationMeta.totalPages,
             },
           });
-          setPagination({
+          const newPagination = {
             current_page: paginationMeta.page,
             per_page: paginationMeta.limit,
             total: paginationMeta.total,
             last_page: paginationMeta.totalPages,
-          });
+          };
+          setPagination(newPagination);
+          sessionStorage.setItem('employees_pagination', JSON.stringify(newPagination));
           setSortedEmployees(employees);
         } else {
           console.error('Failed to fetch employees:', response.message);
@@ -112,7 +117,7 @@ const EmployeesList = () => {
   );
 
   useEffect(() => {
-    fetchEmployees(1, 10);
+    fetchEmployees(pagination.current_page, pagination.per_page);
   }, [fetchEmployees]);
 
   const handlePageChange = (page) => {
@@ -143,7 +148,7 @@ const EmployeesList = () => {
       });
       if (response.success) {
         showSuccessToast(response.message || 'Employee deleted successfully');
-        fetchEmployees();
+        fetchEmployees(pagination.current_page, pagination.per_page);
       } else {
         showErrorToast(response.message || 'Failed to delete employee');
       }
@@ -185,7 +190,7 @@ const EmployeesList = () => {
       {/* Page Header - Outside Card */}
       <div className="flex flex-row items-center justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] bg-clip-text text-transparent pb-2">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent pb-2">
             Employee Management
           </h1>
           <p className="text-sm sm:text-base text-gray-500 mt-1">
@@ -198,7 +203,7 @@ const EmployeesList = () => {
 
           <Button
             onClick={() => navigate('/employee/add')}
-            className='h-10 px-4 sm:px-6 bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc]
+            className='h-10 px-4 sm:px-6 bg-primary hover:bg-primary-hover
                         text-white font-semibold gap-2
                         shadow-lg shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40
                         hover:-translate-y-0.5 transition-all duration-200
@@ -354,3 +359,4 @@ const EmployeesList = () => {
 };
 
 export default EmployeesList;
+

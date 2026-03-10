@@ -32,7 +32,7 @@ const ServiceTaxPage = () => {
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
               <div>
-                <h1 className='text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] bg-clip-text text-transparent'>
+                <h1 className='text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent'>
                   Service Tax Management
                 </h1>
                 <p className='text-sm text-gray-500 mt-1 font-medium'>
@@ -59,3 +59,4 @@ const ServiceTaxPage = () => {
 };
 
 export default ServiceTaxPage;
+

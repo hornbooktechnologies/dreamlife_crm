@@ -89,7 +89,7 @@ const HolidayCalendar = ({
           </button>
 
           <div className='text-center'>
-            <h3 className='text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] bg-clip-text text-transparent pb-2'>
+            <h3 className='text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent pb-2'>
               {MONTH_NAMES[currentMonth]} {currentYear}
             </h3>
             <div className='h-0.5 sm:h-1 w-16 sm:w-24 mx-auto mt-1.5 sm:mt-2 bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] rounded-full' />
@@ -213,3 +213,4 @@ const HolidayCalendar = ({
 };
 
 export default HolidayCalendar;
+

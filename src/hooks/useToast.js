@@ -1,28 +1,29 @@
 import { toast } from 'sonner';
+import { useCallback, useMemo } from 'react';
 
 const useToast = () => {
-    const showSuccessToast = (message) => {
+    const showSuccessToast = useCallback((message) => {
         toast.success(message);
-    };
+    }, []);
 
-    const showErrorToast = (message) => {
+    const showErrorToast = useCallback((message) => {
         toast.error(message);
-    };
+    }, []);
 
-    const showInfoToast = (message) => {
+    const showInfoToast = useCallback((message) => {
         toast.info(message);
-    };
+    }, []);
 
-    const showWarningToast = (message) => {
+    const showWarningToast = useCallback((message) => {
         toast.warning(message);
-    };
+    }, []);
 
-    return {
+    return useMemo(() => ({
         showSuccessToast,
         showErrorToast,
         showInfoToast,
         showWarningToast,
-    };
+    }), [showSuccessToast, showErrorToast, showInfoToast, showWarningToast]);
 };
 
 export default useToast;

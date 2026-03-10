@@ -21,6 +21,19 @@ const PaySlipTemplate = forwardRef(({ data }, ref) => {
   );
   const netSalary = totalEarnings - totalDeductions;
 
+  // Helper function to format labels
+  const formatLabel = (key) => {
+    const formatted = key.replace(/([A-Z])/g, " $1").trim();
+    // Convert HRA and PF to uppercase
+    if (formatted.toLowerCase() === 'hra' || formatted.toLowerCase() === 'h r a') {
+      return 'HRA';
+    }
+    if (formatted.toLowerCase() === 'pf' || formatted.toLowerCase() === 'p f') {
+      return 'PF';
+    }
+    return formatted;
+  };
+
   return (
     <div
       ref={ref}
@@ -107,7 +120,7 @@ const PaySlipTemplate = forwardRef(({ data }, ref) => {
               {Object.entries(data?.earnings || {}).map(([key, value]) => (
                 <tr key={key}>
                   <td className="border border-gray-300 p-2 capitalize">
-                    {key.replace(/([A-Z])/g, " $1").trim()}
+                    {formatLabel(key)}
                   </td>
                   <td className="border border-gray-300 p-2 text-right">
                     {Number(value).toFixed(2)}
@@ -140,7 +153,7 @@ const PaySlipTemplate = forwardRef(({ data }, ref) => {
               {Object.entries(data?.deductions || {}).map(([key, value]) => (
                 <tr key={key}>
                   <td className="border border-gray-300 p-2 capitalize">
-                    {key.replace(/([A-Z])/g, " $1").trim()}
+                    {formatLabel(key)}
                   </td>
                   <td className="border border-gray-300 p-2 text-right">
                     {Number(value).toFixed(2)}

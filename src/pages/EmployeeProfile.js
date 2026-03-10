@@ -144,7 +144,7 @@ const EmployeeProfile = () => {
     return (
         <div className="animate-in fade-in duration-500">
             {/* Header */}
-            <div className="max-w-[1200px] mx-auto pt-6 flex items-center gap-2 mb-6 px-4">
+            <div className="max-w-[1200px] mx-auto flex items-center gap-2 mb-6 px-4">
                 <button
                     onClick={() => navigate(-1)}
                     className="p-2 -ml-2 text-gray-500 hover:text-[#3a5f9e] rounded-full hover:bg-blue-50 transition-all duration-200 group"
@@ -152,7 +152,7 @@ const EmployeeProfile = () => {
                 >
                     <ArrowLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
                 </button>
-                <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] bg-clip-text text-transparent pb-1">
+                <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent pb-1">
                     Profile
                 </h1>
             </div>
@@ -279,3 +279,4 @@ const EmployeeProfile = () => {
 };
 
 export default EmployeeProfile;
+

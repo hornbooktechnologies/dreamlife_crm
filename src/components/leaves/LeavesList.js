@@ -48,7 +48,7 @@ const LeavesList = () => {
   const { showSuccessToast, showErrorToast } = useToast();
   const isAdmin = user?.role === 'admin' || user?.role === 'hr';
   const canApprove = user?.role === 'admin' || user?.role === 'manager';
-  const isEmployee = user?.role === 'employee';
+  const isEmployee = user?.role === 'employee' || user?.role === 'bde' || user?.role === 'Bde' || user?.role === 'BDE';
 
   const [statusFilter, setStatusFilter] = useState('all');
   // Renamed from selectedEmployee to employeeSearch for text search
@@ -324,7 +324,7 @@ const LeavesList = () => {
       {/* Page Header - Outside Card */}
       <div className="flex flex-row items-center justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] bg-clip-text text-transparent pb-2">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent pb-2">
             Leave Management
           </h1>
           <p className="text-sm sm:text-base text-gray-500 mt-1">
@@ -358,9 +358,9 @@ const LeavesList = () => {
             "0 8px 32px rgba(59, 130, 246, 0.15), inset 0 1px 0 rgba(255,255,255,0.8)",
         }}
       >
-        <div className='flex items-center justify-end gap-2 p-4 pb-0 sm:p-6 sm:pb-0'>
+        <div className='flex flex-col gap-2 p-4 pb-0 sm:p-6 sm:pb-0'>
           {/* Toolbar */}
-          <div className="flex items-center justify-end gap-2">
+          <div className="w-full flex items-center justify-end gap-2">
             <TooltipProvider>
               {/* Filter Button */}
               <Tooltip>
@@ -603,7 +603,13 @@ const LeavesList = () => {
         editableLeave={leaveToEdit}
         fetchLeaves={() => {
           const filters = buildFilters();
-          fetchLeaves(pagination.current_page, pagination.per_page, filters);
+          // If we are editing, stay on the current page. 
+          // If we are creating, go to page 1 to see the new request.
+          if (formMode === 'edit') {
+            fetchLeaves(pagination.current_page, pagination.per_page, filters);
+          } else {
+            fetchLeaves(1, pagination.per_page, filters);
+          }
         }}
       />
 
@@ -633,3 +639,4 @@ const LeavesList = () => {
 };
 
 export default LeavesList;
+

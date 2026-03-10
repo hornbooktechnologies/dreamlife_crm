@@ -88,7 +88,7 @@ const ViewUserDialog = ({ isOpen, setIsOpen, user }) => {
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogContent className="sm:max-w-[600px] overflow-hidden p-0 border-0 shadow-2xl [&>button]:!text-white [&>button]:top-5 [&>button]:right-5 [&>button]:focus:ring-0 [&>button]:focus:outline-none [&>button]:transition-all [&>button>svg]:w-6 [&>button>svg]:h-6 [&>button>svg]:stroke-[3]">
                 {/* Gradient Header */}
-                <DialogHeader className="bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] text-white p-6 pb-8 shrink-0 !text-left !items-start">
+                <DialogHeader className="bg-gradient-to-r from-primary via-primary-hover to-primary text-white p-6 pb-8 shrink-0 !text-left !items-start">
                     <DialogTitle className="text-2xl font-bold">User Details</DialogTitle>
                 </DialogHeader>
 
@@ -145,3 +145,4 @@ const ViewUserDialog = ({ isOpen, setIsOpen, user }) => {
 };
 
 export default ViewUserDialog;
+

@@ -65,13 +65,14 @@ const CreateOrEditLeaveForm = ({
   // Admin, Manager, and HR can select employees for leave
   const canSelectEmployee =
     user?.role === 'admin' || user?.role === 'manager' || user?.role === 'hr';
-  // Only employees are restricted from selecting past dates
-  const canSelectPastDates = user?.role !== 'employee';
+  // Only employees and BDEs are restricted from selecting today and tomorrow's dates
+  const isRestrictedRole = user?.role === 'employee' || user?.role === 'bde';
+  const canSelectPastDates = !isRestrictedRole;
 
-  // Get tomorrow's date in YYYY-MM-DD format for min attribute
-  const tomorrowDate = new Date();
-  tomorrowDate.setDate(tomorrowDate.getDate() + 1);
-  const tomorrow = tomorrowDate.toISOString().split('T')[0];
+  // Get tomorrow's date in YYYY-MM-DD format for min attribute (only today is disabled)
+  const minDate = new Date();
+  minDate.setDate(minDate.getDate() + 1);
+  const tomorrow = minDate.toISOString().split('T')[0];
 
   const {
     register,
@@ -102,8 +103,17 @@ const CreateOrEditLeaveForm = ({
     if (startDate && endDate) {
       const start = new Date(startDate);
       const end = new Date(endDate);
-      const diffTime = Math.abs(end - start);
-      const fullDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+      let fullDays = 0;
+      const curDate = new Date(start.getTime());
+      while (curDate <= end) {
+        const dayOfWeek = curDate.getDay();
+        if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+          // 0 = Sunday, 6 = Saturday
+          fullDays++;
+        }
+        curDate.setDate(curDate.getDate() + 1);
+      }
 
       // If same day and half-day selected, return 0.5
       if (
@@ -114,8 +124,6 @@ const CreateOrEditLeaveForm = ({
       }
 
       // If multiple days with half-day on start or end
-      // first_half: half day on start date, full days rest
-      // second_half: full days, half day on start date
       if (
         fullDays > 1 &&
         (duration === 'first_half' || duration === 'second_half')
@@ -141,7 +149,10 @@ const CreateOrEditLeaveForm = ({
   useEffect(() => {
     const fetchEmployeesList = async () => {
       try {
-        const response = await requestHandler('/employees', { method: 'GET' });
+        const response = await requestHandler('/employees', {
+          method: 'GET',
+          params: { limit: 100 },
+        });
         if (response.success) {
           const data = response.data.data || response.data || [];
           setEmployees(data);
@@ -255,7 +266,8 @@ const CreateOrEditLeaveForm = ({
         return;
       }
 
-      const days = calculateDays();
+
+
 
       let payload = {
         start_date: data.start_date,
@@ -298,7 +310,7 @@ const CreateOrEditLeaveForm = ({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className='w-[95vw] sm:max-w-[600px] max-h-[90vh] overflow-hidden p-0 bg-white border-0 shadow-2xl flex flex-col text-left [&>button]:!text-white [&>button]:top-5 [&>button]:right-5 [&>button]:focus:ring-0 [&>button]:focus:outline-none [&>button]:transition-all [&>button>svg]:w-6 [&>button>svg]:h-6 [&>button>svg]:stroke-[3]'>
         {/* Header with Gradient */}
-        <DialogHeader className='p-6 bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] text-white shrink-0 !text-left'>
+        <DialogHeader className='p-6 bg-gradient-to-r from-primary via-primary-hover to-primary text-white shrink-0 !text-left'>
           <DialogTitle className='text-2xl font-bold flex items-center gap-2'>
             {type === 'edit' ? 'Edit Leave Request' : 'New Leave Request'}
           </DialogTitle>
@@ -558,7 +570,7 @@ const CreateOrEditLeaveForm = ({
 
               </div>
 
-              <DialogFooter className='p-6 border-t bg-gray-50/50 mt-auto gap-3'>
+              <DialogFooter className='p-6 border-t bg-gray-50/50 mt-auto gap-2'>
                 <Button
                   type='button'
                   variant='outline'
@@ -569,13 +581,13 @@ const CreateOrEditLeaveForm = ({
                 <Button
                   type='submit'
                   disabled={isSubmitting}
-                  className='bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] text-white hover:opacity-90 transition-opacity'
+                  className='bg-gradient-to-r from-primary via-primary-hover to-primary text-white hover:opacity-90 transition-opacity'
                 >
                   {isSubmitting
                     ? 'Processing...'
                     : type === 'edit'
-                      ? 'Save Changes'
-                      : 'Submit Request'}
+                      ? 'Update'
+                      : 'Create'}
                 </Button>
               </DialogFooter>
             </>
@@ -587,3 +599,4 @@ const CreateOrEditLeaveForm = ({
 };
 
 export default CreateOrEditLeaveForm;
+

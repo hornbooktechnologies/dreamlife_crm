@@ -132,7 +132,7 @@ const EmployeeDocuments = () => {
       {/* Page Header - Outside Card */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 flex-wrap mb-6">
         <div>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] bg-clip-text text-transparent pb-2">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent pb-2">
             Employee Documents
           </h1>
           <p className="text-sm sm:text-base text-gray-500 mt-1">
@@ -217,3 +217,4 @@ const EmployeeDocuments = () => {
 };
 
 export default EmployeeDocuments;
+

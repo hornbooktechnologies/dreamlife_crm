@@ -609,8 +609,8 @@ const Dashboard = () => {
                 {employeesOnLeaveToday.length} Away
               </span>
             </div>
-            <div className='flex flex-col gap-3 flex-1'>
-              {employeesOnLeaveToday.slice(0, 2).map((emp) => (
+            <div className='flex flex-col gap-3 flex-1 overflow-y-auto max-h-[300px] pr-1 custom-scrollbar'>
+              {employeesOnLeaveToday.map((emp) => (
                 <div
                   key={emp.id}
                   className='flex items-center gap-4 p-3 rounded-2xl bg-white/60 border border-slate-100 hover:bg-white transition-colors cursor-pointer'
@@ -668,8 +668,8 @@ const Dashboard = () => {
               </span>
             </div>
 
-            <div className='flex flex-col gap-3 flex-1 relative z-10'>
-              {todaysBirthdays.slice(0, 2).map((user) => (
+            <div className='flex flex-col gap-3 flex-1 relative z-10 overflow-y-auto max-h-[300px] pr-1 custom-scrollbar'>
+              {todaysBirthdays.map((user) => (
                 <div
                   key={user.id}
                   className='flex items-center gap-4 p-3 rounded-2xl bg-white/60 border border-white/50 hover:bg-white transition-colors cursor-pointer shadow-sm group'

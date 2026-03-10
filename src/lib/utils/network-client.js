@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getFromLocalStorage, removeFromLocalStorage } from './storage-utils';
+import { getFromLocalStorage, removeFromLocalStorage, setToLocalStorage } from './storage-utils';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api';
 
@@ -25,78 +25,135 @@ apiClient.interceptors.request.use(
     }
 );
 
-// Response interceptor to handle token expiration and unauthorized errors
+// ─────────────────────────────────────────────────────────────────────────────
+// Token Refresh Queue
+// Prevents multiple concurrent refresh calls; queues any requests that arrive
+// while a refresh is already in progress.
+// ─────────────────────────────────────────────────────────────────────────────
+let isRefreshing = false;
+let failedQueue = [];
+
+const processQueue = (error, token = null) => {
+    failedQueue.forEach((prom) => {
+        if (error) {
+            prom.reject(error);
+        } else {
+            prom.resolve(token);
+        }
+    });
+    failedQueue = [];
+};
+
+const refreshAccessToken = async () => {
+    const refreshToken = getFromLocalStorage('refreshToken');
+    if (!refreshToken) throw new Error('No refresh token available');
+
+    // Use a plain axios call to avoid interceptor loop
+    const response = await axios.post(`${API_BASE_URL}/auth/refresh-token`, {
+        refreshToken,
+    });
+
+    const data = response.data;
+
+    if (data.success) {
+        // Robustly handle both nested and flat structures
+        const accessToken = data.data?.tokens?.accessToken || data.data?.accessToken;
+        const newRefreshToken = data.data?.tokens?.refreshToken || data.data?.refreshToken;
+
+        if (accessToken) {
+            setToLocalStorage('accessToken', accessToken);
+            if (newRefreshToken) {
+                setToLocalStorage('refreshToken', newRefreshToken);
+            }
+            return accessToken;
+        }
+    }
+
+    throw new Error('Token refresh failed');
+};
+
+const triggerLogout = () => {
+    removeFromLocalStorage('accessToken');
+    removeFromLocalStorage('refreshToken');
+    removeFromLocalStorage('auth-storage');
+    window.location.href = '/auth/login';
+};
+
+// Response interceptor to handle token expiration and auto-refresh
 apiClient.interceptors.response.use(
     (response) => {
-        // Check if response has token expiration error (even with 200 status)
         const data = response.data;
-
-        // Handle case where backend returns 200 but with token error
+        // Some backends return 200 with a token-error body
         if (
             data &&
             data.success === false &&
             (data.error?.code === 'TOKEN_INVALID' ||
-                data.error?.code === 'TOKEN_EXPIRED' ||
-                data.message?.toLowerCase().includes('token') &&
-                (data.message?.toLowerCase().includes('invalid') ||
-                    data.message?.toLowerCase().includes('expired')))
+                data.error?.code === 'TOKEN_EXPIRED')
         ) {
-            console.log('Token expired or invalid (from response data). Logging out...');
-
-            // Clear all authentication data from localStorage
-            removeFromLocalStorage('accessToken');
-            removeFromLocalStorage('refreshToken');
-            removeFromLocalStorage('auth-storage');
-
-            // Redirect to login page
-            window.location.href = '/auth/login';
-
-            // Return the response as-is (redirect will happen anyway)
             return response;
         }
-
-        // If response is successful, just return it
         return response;
     },
-    (error) => {
-        // Check if error is due to authentication (401 Unauthorized)
-        // Note: 403 Forbidden means user is authenticated but lacks permission (authorization error)
-        // Only 401 means token is invalid/expired (authentication error)
-        if (error.response) {
-            const status = error.response.status;
-            const data = error.response.data;
+    async (error) => {
+        const originalRequest = error.config;
 
-            // Check for 401 (Unauthorized) OR 403 (Forbidden) with Token Error
-            const isTokenError =
-                status === 401 ||
-                (status === 403 &&
-                    data &&
-                    (data.error?.code === 'TOKEN_INVALID' ||
-                        data.error?.code === 'TOKEN_EXPIRED' ||
-                        data.message?.toLowerCase().includes('token')));
-
-            if (isTokenError) {
-                // Check if this is a login attempt (don't redirect if user is trying to login)
-                const isLoginAttempt = error.config?.url?.includes('/auth/login');
-
-                if (!isLoginAttempt) {
-                    // Token is invalid or expired
-                    console.log(
-                        `Token expired or invalid (${status} status). Logging out...`
-                    );
-
-                    // Clear all authentication data from localStorage
-                    removeFromLocalStorage('accessToken');
-                    removeFromLocalStorage('refreshToken');
-                    removeFromLocalStorage('auth-storage');
-
-                    // Redirect to login page
-                    window.location.href = '/auth/login';
-                }
-            }
+        if (!error.response) {
+            return Promise.reject(error);
         }
 
-        return Promise.reject(error);
+        const status = error.response.status;
+        const data = error.response.data;
+
+        // Check for 401 (Unauthorized) OR 403 (Forbidden) with Token Error
+        const isTokenError =
+            status === 401 ||
+            (status === 403 &&
+                data &&
+                (data.error?.code === 'TOKEN_INVALID' ||
+                    data.error?.code === 'TOKEN_EXPIRED' ||
+                    data.message?.toLowerCase().includes('token')));
+
+        const isAuthAttempt = originalRequest?.url?.includes('/auth/');
+
+        // Don't intercept actual auth requests (login, refresh)
+        if (!isTokenError || isAuthAttempt) {
+            return Promise.reject(error);
+        }
+
+        // Already retried once — give up and logout
+        if (originalRequest._retry) {
+            triggerLogout();
+            return Promise.reject(error);
+        }
+
+        // Another refresh is already running — queue this request
+        if (isRefreshing) {
+            return new Promise((resolve, reject) => {
+                failedQueue.push({ resolve, reject });
+            })
+                .then((token) => {
+                    originalRequest.headers.Authorization = `Bearer ${token}`;
+                    return apiClient(originalRequest);
+                })
+                .catch((err) => Promise.reject(err));
+        }
+
+        // Start refresh
+        originalRequest._retry = true;
+        isRefreshing = true;
+
+        try {
+            const newToken = await refreshAccessToken();
+            processQueue(null, newToken);
+            originalRequest.headers.Authorization = `Bearer ${newToken}`;
+            return apiClient(originalRequest);
+        } catch (refreshError) {
+            processQueue(refreshError, null);
+            triggerLogout();
+            return Promise.reject(refreshError);
+        } finally {
+            isRefreshing = false;
+        }
     }
 );
 

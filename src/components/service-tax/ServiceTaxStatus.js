@@ -66,7 +66,7 @@ const ServiceTaxStatus = () => {
       />
       <CardContent className="p-6 relative z-10 flex items-center justify-between">
         <div>
-          <h3 className="text-lg font-bold bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] bg-clip-text text-transparent">
+          <h3 className="text-lg font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent">
             {monthNames[currentMonth - 1]} {currentYear}
           </h3>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -93,3 +93,4 @@ const ServiceTaxStatus = () => {
 };
 
 export default ServiceTaxStatus;
+

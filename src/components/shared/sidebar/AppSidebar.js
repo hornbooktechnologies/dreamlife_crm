@@ -65,9 +65,9 @@ const AppSidebar = () => {
         >
           <div className={cn("transition-all duration-500", isOpen ? "flex" : "hidden md:flex opacity-0 scale-0 w-0")}>
             <img
-              src={getIconUrl("logo.svg")}
-              alt="HB Holiday CRM"
-              className="w-[160px] h-auto"
+              src={getIconUrl("Logo-dark.png")}
+              alt="Dreamlife design CRM"
+              className="w-[120px] h-auto"
             />
           </div>
           <div className={cn("transition-all duration-500", !isOpen ? "flex" : "hidden md:flex opacity-0 scale-0 w-0")}>
@@ -160,11 +160,11 @@ const AppSidebar = () => {
                     isOpen
                       ? "justify-start px-5 py-3 gap-3 rounded-2xl w-full"
                       : "justify-center w-12 h-12 mx-auto rounded-full",
-                    "text-slate-500 hover:text-red-600 hover:bg-red-50 hover:shadow-sm",
+                    "text-primary hover:text-red-600 hover:bg-red-50 hover:shadow-sm",
                   )}
                 >
                   <LogOut
-                    className="text-slate-500 group-hover:text-red-600 transition-all duration-300 shrink-0 group-hover:scale-110"
+                    className="text-primary group-hover:text-red-600 transition-all duration-300 shrink-0 group-hover:scale-110"
                     size={isOpen ? 20 : 22}
                   />
                   <span className={cn(
@@ -176,7 +176,7 @@ const AppSidebar = () => {
                 </button>
               </TooltipTrigger>
               {!isOpen && (
-                <TooltipContent side="right" sideOffset={12} className="bg-red-600 border-none text-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-2xl">
+                <TooltipContent side="right" sideOffset={12} className="bg-primary border-none text-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-2xl">
                   Log Out
                 </TooltipContent>
               )}

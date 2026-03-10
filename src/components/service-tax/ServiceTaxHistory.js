@@ -21,7 +21,13 @@ const ServiceTaxHistory = ({ className }) => {
     const fetchHistory = async () => {
       // Robustly resolve employee ID: check explicit employee_id first, then fallback to id if role is employee
       const employeeId =
-        user?.employee_id || (user?.role === "employee" ? user?.id : null);
+        user?.employee_id ||
+        (user?.role === "employee" ||
+          user?.role === "bde" ||
+          user?.role === "Bde" ||
+          user?.role === "BDE"
+          ? user?.id
+          : null);
 
       if (!employeeId) {
         console.warn("Could not resolve employee ID for service tax history");
@@ -61,7 +67,7 @@ const ServiceTaxHistory = ({ className }) => {
   return (
     <Card className={`border-0 shadow-lg ${className}`}>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-xl font-bold bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] bg-clip-text text-transparent">
+        <CardTitle className="flex items-center gap-2 text-xl font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent">
           <History className="w-6 h-6 text-[#3a5f9e]" />
           Payment History
         </CardTitle>
@@ -146,3 +152,4 @@ const ServiceTaxHistory = ({ className }) => {
 };
 
 export default ServiceTaxHistory;
+

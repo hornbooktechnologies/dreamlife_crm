@@ -44,6 +44,13 @@ code {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+@layer base {
+  :root {
+    --scrollbar-thumb: theme("colors.primary");
+    --scrollbar-thumb-hover: theme("colors.primary-hover");
+  }
+}
+
 /* Global Scrollbar Styles */
 ::-webkit-scrollbar {
   width: 2px;
@@ -55,16 +62,16 @@ code {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(82, 135, 188);
+  background: var(--scrollbar-thumb);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(65, 110, 155);
+  background: var(--scrollbar-thumb-hover);
 }
 
 /* For Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgb(82, 135, 188) transparent;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
 }

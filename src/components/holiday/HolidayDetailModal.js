@@ -314,7 +314,7 @@ const HolidayDetailModal = ({
                     Saving...
                   </>
                 ) : (
-                  'Save Changes'
+                  'Update'
                 )}
               </Button>
             </DialogFooter>

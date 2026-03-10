@@ -10,7 +10,7 @@ const Settings = () => {
         <div className='p-4 space-y-8 max-w-[1920px] mx-auto bg-gray-50'>
             {/* Header */}
             <div className='flex flex-col gap-1'>
-                <h1 className='md:text-4xl text-2xl font-semibold tracking-tight text-gray-900'>
+                <h1 className='md:text-4xl text-2xl font-semibold tracking-tight text-primary'>
                     Settings
                 </h1>
                 <p className='text-gray-500 text-sm'>

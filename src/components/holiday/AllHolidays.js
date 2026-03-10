@@ -230,7 +230,7 @@ const AllHolidays = () => {
             <ArrowLeft className='w-4 h-4 sm:w-5 sm:h-5' />
           </Button>
           <div className="min-w-0">
-            <h1 className='text-xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] bg-clip-text text-transparent truncate'>
+            <h1 className='text-xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent truncate'>
               All Holidays
             </h1>
             <p className='hidden sm:block text-sm sm:text-base text-gray-500 mt-1'>
@@ -552,3 +552,4 @@ const AllHolidays = () => {
 };
 
 export default AllHolidays;
+

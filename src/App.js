@@ -21,6 +21,7 @@ import ActivityLogs from "./pages/ActivityLogs";
 import EmployeeProfile from "./pages/EmployeeProfile";
 import ProjectManagement from "./pages/ProjectManagement";
 import ResumeBuilder from "./pages/ResumeBuilder";
+import AttendanceTracking from "./pages/AttendanceTracking";
 import PrivateRoute from "./components/guards/PrivateRoute";
 import SidebarWrapper from "./components/shared/sidebar/SidebarWrapper";
 import { AuthProvider, useAuthStore } from "./context/AuthContext";
@@ -70,6 +71,7 @@ function AppContent() {
 
               <Route path="/project-management" element={<ProjectManagement />} />
               <Route path="/resume-builder" element={<ResumeBuilder />} />
+              <Route path="/attendance-tracking" element={<AttendanceTracking />} />
             </Route>
           </Routes>
         </LayoutProvider>

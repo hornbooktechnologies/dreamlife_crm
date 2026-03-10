@@ -9,6 +9,7 @@ import {
   Receipt,
   Activity,
   FolderKanban,
+  ClockAlert,
 } from "lucide-react";
 
 export const MenuItems = [
@@ -44,6 +45,12 @@ export const MenuItems = [
     icon: Calendar,
     // Visible to all roles
   },
+  {
+    title: "Attendance",
+    url: "/attendance-tracking",
+    icon: ClockAlert,
+    allowedRoles: ["admin", "employee", "manager", "Bde", "bde", "BDE"],
+  },
   // {
   //   title: "Settings",
   //   url: "/settings",
@@ -68,12 +75,12 @@ export const MenuItems = [
     icon: Activity,
     allowedRoles: ["admin", "manager"],
   },
-  {
-    title: "Resume",
-    url: "/resume-builder",
-    icon: FileText,
-    allowedRoles: ["admin", "hr", "manager", "Bde", "bde", "BDE"],
-  },
+  // {
+  //   title: "Resume",
+  //   url: "/resume-builder",
+  //   icon: FileText,
+  //   allowedRoles: ["admin", "hr", "manager", "Bde", "bde", "BDE"],
+  // },
   {
     title: "Projects",
     url: "/project-management",

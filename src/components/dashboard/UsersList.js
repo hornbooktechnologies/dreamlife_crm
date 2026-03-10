@@ -200,7 +200,7 @@ const UsersList = () => {
       {/* Page Header - Outside Card */}
       <div className="flex flex-row items-center justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] bg-clip-text text-transparent pb-2">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent pb-2">
             User Management
           </h1>
           <p className="text-sm sm:text-base text-gray-500 mt-1">
@@ -213,7 +213,7 @@ const UsersList = () => {
             setUserToEdit(undefined);
             setIsCreateEditUserDialogOpen((prev) => !prev);
           }}
-          className="h-10 px-4 sm:px-6 bg-gradient-to-r from-[#3a5f9e] via-[#5283c5] to-[#6fa8dc] 
+          className="h-10 px-4 sm:px-6 bg-primary hover:bg-primary-hover
                     text-white font-semibold gap-2
                     shadow-lg shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40
                     hover:-translate-y-0.5 transition-all duration-200
@@ -297,7 +297,15 @@ const UsersList = () => {
         isOpen={isCreateEditUserDialogOpen}
         type={formMode}
         editableUser={userToEdit}
-        fetchUsers={fetchUsers}
+        fetchUsers={(page, limit) => {
+          // If we are editing, stay on the current page. 
+          // If we are creating, go to page 1 to see the new user.
+          if (formMode === 'edit') {
+            fetchUsers(page || pagination.current_page, limit || pagination.per_page);
+          } else {
+            fetchUsers(1, limit || pagination.per_page);
+          }
+        }}
       />
 
       <ViewUserDialog
@@ -335,3 +343,4 @@ const UsersList = () => {
 };
 
 export default UsersList;
+
