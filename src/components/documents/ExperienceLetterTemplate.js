@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-
+import { DOCUMENT_WATERMARK_LOGO } from "./documentBranding";
 
 const ExperienceLetterTemplate = forwardRef(({ data }, ref) => {
   // Current date formatted
@@ -14,6 +14,14 @@ const ExperienceLetterTemplate = forwardRef(({ data }, ref) => {
       ref={ref}
       className="bg-white p-12 pt-40 max-w-[800px] mx-auto text-black font-serif leading-relaxed relative min-h-[1000px]"
     >
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-0">
+        <img
+          src={DOCUMENT_WATERMARK_LOGO}
+          alt="Watermark"
+          style={{ opacity: 0.1 }}
+          className="w-[500px]"
+        />
+      </div>
 
 
       <div className="relative z-10">
@@ -42,7 +50,7 @@ const ExperienceLetterTemplate = forwardRef(({ data }, ref) => {
           <p>
             This is to certify that{" "}
             <strong>{data?.name || "[Employee Name]"}</strong> was employed with
-            <strong> Hornbook Technologies</strong> as a{" "}
+            <strong> Dreamlife Designs</strong> as a{" "}
             <strong>{data?.designation || "[Designation]"}</strong>.
           </p>
 
@@ -63,7 +71,7 @@ const ExperienceLetterTemplate = forwardRef(({ data }, ref) => {
 
         {/* Footer */}
         <div className="mt-20">
-          <p className="font-bold">For Hornbook Technologies,</p>
+          <p className="font-bold">For Dreamlife Designs,</p>
           <div className="h-16 mt-4 mb-2">{/* Signature Placeholder */}</div>
           <p className="font-semibold">Authorized Signatory</p>
         </div>

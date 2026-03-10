@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import logo from "../../../src/assets/icons/logo.svg";
+import { DOCUMENT_WATERMARK_LOGO } from "./documentBranding";
 
 const PaySlipTemplate = forwardRef(({ data }, ref) => {
 
@@ -42,7 +42,7 @@ const PaySlipTemplate = forwardRef(({ data }, ref) => {
       {/* Watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-0">
         <img
-          src={logo}
+          src={DOCUMENT_WATERMARK_LOGO}
           alt="Watermark"
           style={{ opacity: 0.1 }}
           className="w-[500px]"
@@ -53,7 +53,7 @@ const PaySlipTemplate = forwardRef(({ data }, ref) => {
         {/* Header */}
         <div className="text-center mb-6 border-b-2 border-gray-800 pb-4">
           <h1 className="text-2xl font-bold uppercase tracking-wider text-[#1a365d]">
-            Hornbook Technologies Pvt. Ltd.
+            Dreamlife Designs
           </h1>
           {/* <p className="text-sm font-medium text-gray-600">
             Excellence in Technology Solutions

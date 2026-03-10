@@ -30,13 +30,8 @@ const ACCEPTED_IMAGE_TYPES = [
 ];
 
 const DESIGNATION_OPTIONS = [
-    "Jr. Frontend Developer",
-    "Sr. Frontend Developer",
-    "Jr. Backend Developer",
-    "Sr. Backend Developer",
-    "Full-Stack Developer",
-    "Jr. BDE",
-    "Sr. BDE",
+    "Jr. interior desigener",
+    "Sr. interior desigener",
 ];
 
 const findMatchingDesignation = (value) => {
@@ -45,7 +40,7 @@ const findMatchingDesignation = (value) => {
     const match = DESIGNATION_OPTIONS.find(
         (option) => option.toLowerCase() === normalizedValue,
     );
-    return match || value; // Return match if found, otherwise original value
+    return match || "";
 };
 
 const formatDateForDisplay = (dateString) => {
@@ -121,7 +116,6 @@ const getSchema = (type) =>
         dob: z.string().min(1, "Please select date of birth"),
         address: z.string().min(1, "Please enter address"),
         status: z.string().min(1, "Please select status"),
-        role: z.string().min(1, "Please select role"),
         user_image: z.any().superRefine((files, ctx) => {
             const result = validateFile(files, "User image", type === "create");
             if (result !== true) {
@@ -227,7 +221,6 @@ const EmployeeFormPage = () => {
             dob: "",
             address: "",
             status: "active",
-            role: "employee",
             user_image: null,
             aadhar_card_image: null,
             pan_card_image: null,
@@ -311,12 +304,6 @@ const EmployeeFormPage = () => {
                 dob: formattedDob,
                 address: editableEmployee.address || "",
                 status: editableEmployee.status,
-                role:
-                    editableEmployee.role === "BDE" ||
-                        editableEmployee.role === "bde" ||
-                        editableEmployee.role === "Bde"
-                        ? "Bde"
-                        : editableEmployee.role || "employee",
                 user_image: editableEmployee.user_image || null,
                 aadhar_card_image: editableEmployee.aadhar_card_image || null,
                 pan_card_image: editableEmployee.pan_card_image || null,
@@ -338,7 +325,6 @@ const EmployeeFormPage = () => {
                 dob: "",
                 address: "",
                 status: "active",
-                role: "employee",
                 user_image: null,
                 aadhar_card_image: null,
                 pan_card_image: null,
@@ -370,6 +356,7 @@ const EmployeeFormPage = () => {
                 payloadData.github = payloadData.github_link;
                 delete payloadData.github_link;
             }
+            payloadData.role = "employee";
 
             if (hasFiles) {
                 const formData = new FormData();
@@ -1011,76 +998,45 @@ const EmployeeFormPage = () => {
                             </div>
                         </div>
 
-                        {/* Role and Status in 2 columns */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div className="space-y-2">
-                                <Label htmlFor="role" className="text-gray-700 font-semibold">
-                                    Role <span className="text-red-500">*</span>
-                                </Label>
-                                <Controller
-                                    control={control}
-                                    name="role"
-                                    render={({ field }) => (
-                                        <Select
-                                            key={field.value}
-                                            onValueChange={field.onChange}
-                                            value={field.value}
-                                        >
-                                            <SelectTrigger className="h-10 border-gray-300 focus:ring-0 focus:ring-offset-0 focus:border-[#3a5f9e] text-gray-900">
-                                                <SelectValue placeholder="Select role" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="employee">Employee</SelectItem>
-                                                <SelectItem value="Bde">BDE</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    )}
-                                />
-                                {errors.role && (
-                                    <p className="text-red-500 text-xs font-medium mt-1">
-                                        {errors.role.message}
-                                    </p>
+                        {/* Status */}
+                        <div className="space-y-2">
+                            <Label htmlFor="status" className="text-gray-700 font-semibold">
+                                Status <span className="text-red-500">*</span>
+                            </Label>
+                            <Controller
+                                control={control}
+                                name="status"
+                                render={({ field }) => (
+                                    <Select
+                                        key={field.value}
+                                        onValueChange={field.onChange}
+                                        value={field.value}
+                                    >
+                                        <SelectTrigger className="h-10 border-gray-300 focus:ring-0 focus:ring-offset-0 focus:border-[#3a5f9e] text-gray-900">
+                                            <SelectValue placeholder="Select status" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="active">
+                                                <span className="flex items-center gap-2">
+                                                    <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                                                    Active
+                                                </span>
+                                            </SelectItem>
+                                            <SelectItem value="inactive">
+                                                <span className="flex items-center gap-2">
+                                                    <span className="w-2 h-2 rounded-full bg-red-500"></span>
+                                                    Inactive
+                                                </span>
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
                                 )}
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="status" className="text-gray-700 font-semibold">
-                                    Status <span className="text-red-500">*</span>
-                                </Label>
-                                <Controller
-                                    control={control}
-                                    name="status"
-                                    render={({ field }) => (
-                                        <Select
-                                            key={field.value}
-                                            onValueChange={field.onChange}
-                                            value={field.value}
-                                        >
-                                            <SelectTrigger className="h-10 border-gray-300 focus:ring-0 focus:ring-offset-0 focus:border-[#3a5f9e] text-gray-900">
-                                                <SelectValue placeholder="Select status" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="active">
-                                                    <span className="flex items-center gap-2">
-                                                        <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                                                        Active
-                                                    </span>
-                                                </SelectItem>
-                                                <SelectItem value="inactive">
-                                                    <span className="flex items-center gap-2">
-                                                        <span className="w-2 h-2 rounded-full bg-red-500"></span>
-                                                        Inactive
-                                                    </span>
-                                                </SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    )}
-                                />
-                                {errors.status && (
-                                    <p className="text-red-500 text-xs font-medium mt-1">
-                                        {errors.status.message}
-                                    </p>
-                                )}
-                            </div>
+                            />
+                            {errors.status && (
+                                <p className="text-red-500 text-xs font-medium mt-1">
+                                    {errors.status.message}
+                                </p>
+                            )}
                         </div>
 
 

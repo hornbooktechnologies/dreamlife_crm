@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import logo from "../../../src/assets/icons/logo.svg";
+import { DOCUMENT_WATERMARK_LOGO } from "./documentBranding";
 
 const OfferLetterTemplate = forwardRef(({ data }, ref) => {
   // Current date formatted if not provided
@@ -23,7 +23,7 @@ const OfferLetterTemplate = forwardRef(({ data }, ref) => {
       {/* Watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-0">
         <img
-          src={logo}
+          src={DOCUMENT_WATERMARK_LOGO}
           alt="Watermark"
           style={{ opacity: 0.1 }}
           className="w-[500px]"
@@ -50,7 +50,7 @@ const OfferLetterTemplate = forwardRef(({ data }, ref) => {
           <p>
             We are pleased to offer you the position of{" "}
             <strong>{data?.designation || "[Designation]"}</strong> at{" "}
-            <strong>Hornbook Technologies</strong>. We were impressed with your
+            <strong>Dreamlife Designs</strong>. We were impressed with your
             skills and experience and believe that you will be a valuable asset
             to our team.
           </p>
@@ -87,7 +87,7 @@ const OfferLetterTemplate = forwardRef(({ data }, ref) => {
 
         {/* Footer */}
         <div className="mt-20">
-          <p className="font-bold">For Hornbook Technologies,</p>
+          <p className="font-bold">For Dreamlife Designs,</p>
           <div className="h-16 mt-4 mb-2">{/* Signature Placeholder */}</div>
           <p className="font-semibold">Authorized Signatory</p>
         </div>
