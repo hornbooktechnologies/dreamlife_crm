@@ -27,6 +27,8 @@ import SidebarWrapper from "./components/shared/sidebar/SidebarWrapper";
 import { AuthProvider, useAuthStore } from "./context/AuthContext";
 import { LayoutProvider } from "./context/LayoutContext";
 import AllHolidays from "./components/holiday/AllHolidays";
+import QuotationPage from "./pages/QuotationPage";
+import CreateOrEditQuotationForm from "./components/quotation/CreateOrEditQuotationForm";
 
 function AppContent() {
   const { tokens } = useAuthStore();
@@ -72,6 +74,9 @@ function AppContent() {
               <Route path="/project-management" element={<ProjectManagement />} />
               <Route path="/resume-builder" element={<ResumeBuilder />} />
               <Route path="/attendance-tracking" element={<AttendanceTracking />} />
+              <Route path="/quotation" element={<QuotationPage />} />
+              <Route path="/quotation/create" element={<CreateOrEditQuotationForm />} />
+              <Route path="/quotation/edit/:id" element={<CreateOrEditQuotationForm />} />
             </Route>
           </Routes>
         </LayoutProvider>

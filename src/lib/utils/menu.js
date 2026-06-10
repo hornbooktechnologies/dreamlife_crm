@@ -87,4 +87,10 @@ export const MenuItems = [
     icon: FolderKanban,
     allowedRoles: ["admin"],
   },
+  {
+    title: "Quotation",
+    url: "/quotation",
+    icon: FileText,
+    allowedRoles: ["admin", "manager"],
+  },
 ];
