@@ -107,109 +107,109 @@ export const QuotationPdfTemplate = React.forwardRef(({ quotation }, ref) => {
       </div>
 
       {/* Main Table */}
-      <table className="w-full border-collapse border border-black text-sm mb-6">
+      <table className="w-full border-collapse border border-slate-300 text-sm mb-6">
         <thead>
-          <tr className="bg-black text-white">
-            <th className="border border-black py-2 px-3 text-left w-12">No.</th>
-            <th className="border border-black py-2 px-3 text-left">Description</th>
-            <th className="border border-black py-2 px-3 text-right w-28">Rate</th>
-            <th className="border border-black py-2 px-3 text-right w-32">Amount</th>
+          <tr className="bg-[#B79352] text-white">
+            <th className="border border-slate-300 py-2 px-3 text-left w-12">No.</th>
+            <th className="border border-slate-300 py-2 px-3 text-left">Description</th>
+            <th className="border border-slate-300 py-2 px-3 text-right w-28">Rate</th>
+            <th className="border border-slate-300 py-2 px-3 text-right w-32">Amount</th>
           </tr>
         </thead>
         <tbody>
           {/* Civil Work Section */}
-          <tr className="bg-gray-400 font-bold text-center">
-            <td colSpan={4} className="border border-black py-1 tracking-wider text-xs">
+          <tr className="bg-[#FDFBF7] font-bold text-center text-[#B79352]">
+            <td colSpan={4} className="border border-slate-300 py-1.5 tracking-wider text-xs">
               CIVIL WORK
             </td>
           </tr>
           {civilWorkItems.map((item, idx) => (
             <tr key={item.id || idx}>
-              <td className="border border-black py-2 px-3 valign-top text-center">{idx + 1}</td>
-              <td className="border border-black py-2 px-3">
-                <ul className="list-disc pl-5">
+              <td className="border border-slate-300 py-2 px-3 valign-top text-center text-slate-600">{idx + 1}</td>
+              <td className="border border-slate-300 py-2 px-3">
+                <ul className="list-disc pl-5 text-slate-800">
                   <li>{item.description}</li>
                 </ul>
               </td>
-              <td className="border border-black py-2 px-3 text-right">
+              <td className="border border-slate-300 py-2 px-3 text-right text-slate-700">
                 {parseFloat(item.rate) > 0 ? parseFloat(item.rate).toLocaleString("en-IN", { minimumFractionDigits: 2 }) : "-"}
               </td>
-              <td className="border border-black py-2 px-3 text-right">
+              <td className="border border-slate-300 py-2 px-3 text-right text-slate-900 font-medium">
                 {parseFloat(item.amount) > 0 ? parseFloat(item.amount).toLocaleString("en-IN", { minimumFractionDigits: 2 }) : "-"}
               </td>
             </tr>
           ))}
           {civilWorkItems.length === 0 && (
             <tr>
-              <td className="border border-black py-2 px-3 text-center">-</td>
-              <td className="border border-black py-2 px-3 text-gray-400 italic">No Civil Work items listed</td>
-              <td className="border border-black py-2 px-3 text-right">-</td>
-              <td className="border border-black py-2 px-3 text-right">-</td>
+              <td className="border border-slate-300 py-2 px-3 text-center">-</td>
+              <td className="border border-slate-300 py-2 px-3 text-slate-400 italic">No Civil Work items listed</td>
+              <td className="border border-slate-300 py-2 px-3 text-right">-</td>
+              <td className="border border-slate-300 py-2 px-3 text-right">-</td>
             </tr>
           )}
 
           {/* Interior Section */}
-          <tr className="bg-gray-400 font-bold text-center">
-            <td colSpan={4} className="border border-black py-1 tracking-wider text-xs">
+          <tr className="bg-[#FDFBF7] font-bold text-center text-[#B79352]">
+            <td colSpan={4} className="border border-slate-300 py-1.5 tracking-wider text-xs">
               INTERIOR
             </td>
           </tr>
           {interiorItems.map((item, idx) => (
             <tr key={item.id || idx}>
-              <td className="border border-black py-2 px-3 valign-top text-center">{idx + 1}</td>
-              <td className="border border-black py-2 px-3">
-                <ul className="list-disc pl-5">
+              <td className="border border-slate-300 py-2 px-3 valign-top text-center text-slate-600">{idx + 1}</td>
+              <td className="border border-slate-300 py-2 px-3">
+                <ul className="list-disc pl-5 text-slate-800">
                   <li>{item.description}</li>
                 </ul>
               </td>
-              <td className="border border-black py-2 px-3 text-right">
+              <td className="border border-slate-300 py-2 px-3 text-right text-slate-700">
                 {parseFloat(item.rate) > 0 ? parseFloat(item.rate).toLocaleString("en-IN", { minimumFractionDigits: 2 }) : "-"}
               </td>
-              <td className="border border-black py-2 px-3 text-right">
+              <td className="border border-slate-300 py-2 px-3 text-right text-slate-900 font-medium">
                 {parseFloat(item.amount) > 0 ? parseFloat(item.amount).toLocaleString("en-IN", { minimumFractionDigits: 2 }) : "-"}
               </td>
             </tr>
           ))}
           {interiorItems.length === 0 && (
             <tr>
-              <td className="border border-black py-2 px-3 text-center">-</td>
-              <td className="border border-black py-2 px-3 text-gray-400 italic">No Interior items listed</td>
-              <td className="border border-black py-2 px-3 text-right">-</td>
-              <td className="border border-black py-2 px-3 text-right">-</td>
+              <td className="border border-slate-300 py-2 px-3 text-center">-</td>
+              <td className="border border-slate-300 py-2 px-3 text-slate-400 italic">No Interior items listed</td>
+              <td className="border border-slate-300 py-2 px-3 text-right">-</td>
+              <td className="border border-slate-300 py-2 px-3 text-right">-</td>
             </tr>
           )}
 
           {/* Subtotal, GST, Grand Total */}
           <tr>
-            <td colSpan={2} className="border-l border-b border-black"></td>
-            <td className="border border-black py-1.5 px-3 font-bold text-right bg-gray-100">GST</td>
-            <td className="border border-black py-1.5 px-3 text-right">
-              <span className="text-xs text-gray-500 mr-2">({parseFloat(gst_percentage)}%)</span>
+            <td colSpan={2} className="border-l border-b border-slate-300"></td>
+            <td className="border border-slate-300 py-1.5 px-3 font-bold text-right bg-slate-50 text-slate-700">GST</td>
+            <td className="border border-slate-300 py-1.5 px-3 text-right text-slate-800">
+              <span className="text-xs text-slate-500 mr-2">({parseFloat(gst_percentage)}%)</span>
               {gstAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
             </td>
           </tr>
-          <tr className="bg-gray-100 font-bold">
-            <td colSpan={2} className="border-l border-b border-black"></td>
-            <td className="border border-black py-2 px-3 text-right uppercase tracking-wider text-xs">Total Amount</td>
-            <td className="border border-black py-2 px-3 text-right text-base">
+          <tr className="bg-[#FDFBF7] font-bold">
+            <td colSpan={2} className="border-l border-b border-slate-300"></td>
+            <td className="border border-slate-300 py-2 px-3 text-right uppercase tracking-wider text-xs text-[#B79352]">Total Amount</td>
+            <td className="border border-slate-300 py-2 px-3 text-right text-base text-[#B79352] font-extrabold">
               {totalAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
             </td>
           </tr>
 
           {/* Words */}
           <tr>
-            <td colSpan={4} className="border border-black py-2 px-3">
-              <span className="font-bold">Rupees In Words:-</span> {convertNumberToWords(totalAmount)}
+            <td colSpan={4} className="border border-slate-300 py-2.5 px-3 text-slate-800">
+              <span className="font-bold text-slate-900">Rupees In Words:-</span> {convertNumberToWords(totalAmount)}
             </td>
           </tr>
 
           {/* Notes */}
           {note && (
             <tr>
-              <td colSpan={4} className="border border-black py-3 px-3">
-                <div className="font-bold mb-1">NOTE:-</div>
+              <td colSpan={4} className="border border-slate-300 py-3.5 px-3 bg-slate-50/50">
+                <div className="font-bold mb-1 text-slate-900 text-xs">NOTE:-</div>
                 <div 
-                  className="whitespace-pre-line text-xs leading-relaxed" 
+                  className="whitespace-pre-line text-xs leading-relaxed text-slate-700" 
                   dangerouslySetInnerHTML={{
                     __html: note.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                   }}
