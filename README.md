@@ -40,7 +40,7 @@ A modern Holiday CRM application built with React, featuring authentication and 
 
 3. Create a `.env` file in the root directory:
    ```
-   REACT_APP_API_BASE_URL=http://localhost:5000/api
+   REACT_APP_API_BASE_URL=http://localhost:6000/api
    ```
 
 4. Start the development server:

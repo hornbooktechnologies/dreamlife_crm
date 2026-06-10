@@ -83,7 +83,7 @@ The system supports three different user roles:
 Update the `.env` file in the root directory:
 
 ```env
-REACT_APP_API_BASE_URL=http://localhost:5000/api
+REACT_APP_API_BASE_URL=http://localhost:6000/api
 ```
 
 For production:

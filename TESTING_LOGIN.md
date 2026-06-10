@@ -6,7 +6,7 @@
 
 Make sure your backend API is running and accessible at the URL specified in `.env`:
 ```
-REACT_APP_API_BASE_URL=http://localhost:5000/api
+REACT_APP_API_BASE_URL=http://localhost:6000/api
 ```
 
 ### Step 2: Start the Frontend

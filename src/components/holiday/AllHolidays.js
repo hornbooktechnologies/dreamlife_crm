@@ -371,7 +371,7 @@ const AllHolidays = () => {
       <div className='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
         {loading ? (
           <div className='flex flex-col items-center justify-center py-16 text-gray-500'>
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mb-4"></div>
             <p className='text-lg font-medium'>Loading holidays...</p>
           </div>
         ) : filteredHolidays.length === 0 ? (

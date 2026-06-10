@@ -75,7 +75,7 @@ const ServiceTaxHistory = ({ className }) => {
       <CardContent className='p-2 sm:p-6 sm:pt-0'>
         {loading ? (
           <div className="flex flex-col items-center justify-center p-8 space-y-4">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
             <p className="text-gray-500 text-sm">Loading payment history...</p>
           </div>
         ) : history.length === 0 ? (

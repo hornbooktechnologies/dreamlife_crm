@@ -349,7 +349,7 @@ const ActivityLogTable = () => {
         <CardContent className="p-2 sm:p-6 sm:pt-0 overflow-x-auto">
           {loading ? (
             <div className='flex justify-center p-12'>
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
             </div>
           ) : logs.length === 0 ? (
             <div className='text-center p-8 text-gray-500'>
