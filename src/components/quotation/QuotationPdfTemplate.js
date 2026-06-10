@@ -126,10 +126,8 @@ export const QuotationPdfTemplate = React.forwardRef(({ quotation }, ref) => {
           {civilWorkItems.map((item, idx) => (
             <tr key={item.id || idx}>
               <td className="border border-slate-300 py-2 px-3 valign-top text-center text-slate-600">{idx + 1}</td>
-              <td className="border border-slate-300 py-2 px-3">
-                <ul className="list-disc pl-5 text-slate-800">
-                  <li>{item.description}</li>
-                </ul>
+              <td className="border border-slate-300 py-2 px-3 text-slate-800">
+                {item.description}
               </td>
               <td className="border border-slate-300 py-2 px-3 text-right text-slate-700">
                 {parseFloat(item.rate) > 0 ? parseFloat(item.rate).toLocaleString("en-IN", { minimumFractionDigits: 2 }) : "-"}
@@ -157,10 +155,8 @@ export const QuotationPdfTemplate = React.forwardRef(({ quotation }, ref) => {
           {interiorItems.map((item, idx) => (
             <tr key={item.id || idx}>
               <td className="border border-slate-300 py-2 px-3 valign-top text-center text-slate-600">{idx + 1}</td>
-              <td className="border border-slate-300 py-2 px-3">
-                <ul className="list-disc pl-5 text-slate-800">
-                  <li>{item.description}</li>
-                </ul>
+              <td className="border border-slate-300 py-2 px-3 text-slate-800">
+                {item.description}
               </td>
               <td className="border border-slate-300 py-2 px-3 text-right text-slate-700">
                 {parseFloat(item.rate) > 0 ? parseFloat(item.rate).toLocaleString("en-IN", { minimumFractionDigits: 2 }) : "-"}
