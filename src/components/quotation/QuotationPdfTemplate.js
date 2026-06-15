@@ -118,61 +118,53 @@ export const QuotationPdfTemplate = React.forwardRef(({ quotation }, ref) => {
         </thead>
         <tbody>
           {/* Civil Work Section */}
-          <tr className="bg-[#FDFBF7] font-bold text-center text-[#B79352]">
-            <td colSpan={4} className="border border-slate-300 py-1.5 tracking-wider text-xs">
-              CIVIL WORK
-            </td>
-          </tr>
-          {civilWorkItems.map((item, idx) => (
-            <tr key={item.id || idx}>
-              <td className="border border-slate-300 py-2 px-3 valign-top text-center text-slate-600">{idx + 1}</td>
-              <td className="border border-slate-300 py-2 px-3 text-slate-800">
-                {item.description}
-              </td>
-              <td className="border border-slate-300 py-2 px-3 text-right text-slate-700">
-                {parseFloat(item.rate) > 0 ? parseFloat(item.rate).toLocaleString("en-IN", { minimumFractionDigits: 2 }) : "-"}
-              </td>
-              <td className="border border-slate-300 py-2 px-3 text-right text-slate-900 font-medium">
-                {parseFloat(item.amount) > 0 ? parseFloat(item.amount).toLocaleString("en-IN", { minimumFractionDigits: 2 }) : "-"}
-              </td>
-            </tr>
-          ))}
-          {civilWorkItems.length === 0 && (
-            <tr>
-              <td className="border border-slate-300 py-2 px-3 text-center">-</td>
-              <td className="border border-slate-300 py-2 px-3 text-slate-400 italic">No Civil Work items listed</td>
-              <td className="border border-slate-300 py-2 px-3 text-right">-</td>
-              <td className="border border-slate-300 py-2 px-3 text-right">-</td>
-            </tr>
+          {civilWorkItems.length > 0 && (
+            <>
+              <tr className="bg-[#FDFBF7] font-bold text-center text-[#B79352]">
+                <td colSpan={4} className="border border-slate-300 py-1.5 tracking-wider text-xs">
+                  CIVIL WORK
+                </td>
+              </tr>
+              {civilWorkItems.map((item, idx) => (
+                <tr key={item.id || idx}>
+                  <td className="border border-slate-300 py-2 px-3 valign-top text-center text-slate-600">{idx + 1}</td>
+                  <td className="border border-slate-300 py-2 px-3 text-slate-800">
+                    {item.description}
+                  </td>
+                  <td className="border border-slate-300 py-2 px-3 text-right text-slate-700">
+                    {parseFloat(item.rate) > 0 ? parseFloat(item.rate).toLocaleString("en-IN", { minimumFractionDigits: 2 }) : "-"}
+                  </td>
+                  <td className="border border-slate-300 py-2 px-3 text-right text-slate-900 font-medium">
+                    {parseFloat(item.amount) > 0 ? parseFloat(item.amount).toLocaleString("en-IN", { minimumFractionDigits: 2 }) : "-"}
+                  </td>
+                </tr>
+              ))}
+            </>
           )}
 
           {/* Interior Section */}
-          <tr className="bg-[#FDFBF7] font-bold text-center text-[#B79352]">
-            <td colSpan={4} className="border border-slate-300 py-1.5 tracking-wider text-xs">
-              INTERIOR
-            </td>
-          </tr>
-          {interiorItems.map((item, idx) => (
-            <tr key={item.id || idx}>
-              <td className="border border-slate-300 py-2 px-3 valign-top text-center text-slate-600">{idx + 1}</td>
-              <td className="border border-slate-300 py-2 px-3 text-slate-800">
-                {item.description}
-              </td>
-              <td className="border border-slate-300 py-2 px-3 text-right text-slate-700">
-                {parseFloat(item.rate) > 0 ? parseFloat(item.rate).toLocaleString("en-IN", { minimumFractionDigits: 2 }) : "-"}
-              </td>
-              <td className="border border-slate-300 py-2 px-3 text-right text-slate-900 font-medium">
-                {parseFloat(item.amount) > 0 ? parseFloat(item.amount).toLocaleString("en-IN", { minimumFractionDigits: 2 }) : "-"}
-              </td>
-            </tr>
-          ))}
-          {interiorItems.length === 0 && (
-            <tr>
-              <td className="border border-slate-300 py-2 px-3 text-center">-</td>
-              <td className="border border-slate-300 py-2 px-3 text-slate-400 italic">No Interior items listed</td>
-              <td className="border border-slate-300 py-2 px-3 text-right">-</td>
-              <td className="border border-slate-300 py-2 px-3 text-right">-</td>
-            </tr>
+          {interiorItems.length > 0 && (
+            <>
+              <tr className="bg-[#FDFBF7] font-bold text-center text-[#B79352]">
+                <td colSpan={4} className="border border-slate-300 py-1.5 tracking-wider text-xs">
+                  INTERIOR
+                </td>
+              </tr>
+              {interiorItems.map((item, idx) => (
+                <tr key={item.id || idx}>
+                  <td className="border border-slate-300 py-2 px-3 valign-top text-center text-slate-600">{idx + 1}</td>
+                  <td className="border border-slate-300 py-2 px-3 text-slate-800">
+                    {item.description}
+                  </td>
+                  <td className="border border-slate-300 py-2 px-3 text-right text-slate-700">
+                    {parseFloat(item.rate) > 0 ? parseFloat(item.rate).toLocaleString("en-IN", { minimumFractionDigits: 2 }) : "-"}
+                  </td>
+                  <td className="border border-slate-300 py-2 px-3 text-right text-slate-900 font-medium">
+                    {parseFloat(item.amount) > 0 ? parseFloat(item.amount).toLocaleString("en-IN", { minimumFractionDigits: 2 }) : "-"}
+                  </td>
+                </tr>
+              ))}
+            </>
           )}
 
           {/* Subtotal, GST, Grand Total */}
